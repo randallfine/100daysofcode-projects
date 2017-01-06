@@ -69,25 +69,7 @@ var playerMove = function(player) {
 
 };
 
-//player vs CPU easy mode
-var CPU = function() {
-    var num = 0;
-    if ((playerTwo.turn) && (gameOn)) {
-        var move = function() {
-            num = Math.floor(Math.random() * 8);
-            if (col[num].innerText !== "") {
-                move();
-            }
-        };
-        move();
-        col[num].innerText = playerTwo.shape;
-        checkWin(playerTwo.shape);
-        playerTwo.turn = false;
-        playerOne.turn = true;
-    }
-};
-
-//player vs cpu hard mode
+//player vs CPU 
 var cpu = function() {
     var isolatedArray = [];
     var combos = [
@@ -134,22 +116,11 @@ var cpu = function() {
             }).length > 1;
         });
 
-
-        for (var i = 0; i < check.length; i++) {
-            if (check[i]) {
-                console.log(combos[i].length);
-                //col[stuff].indexOf(playerTwo.shape) !== combos[i]
-                //console.log(combos[i].indexOf(playerTwo.shape));
-                // if (combos[i].indexOf(playerTwo.shape) > -1) {
-                //     console.log(combos[i]);
-                // }
-                isolatedArray.push(combos[i]);
+        check.forEach(function(elem, ind) {
+            if (elem) {
+                isolatedArray.push(combos[ind]);
             }
-        }
-
-
-
-        console.log("iso: " + isolatedArray);
+        });
         checkArray(isolatedArray[0]);
     }
 
@@ -159,22 +130,14 @@ var cpu = function() {
                 return index;
             }
         });
-        // var pick = arr.filter(function(el, i) {
-        //     if (col[arr[i]].innerText === "") {
-        //         console.log(arr[i]);
-        //         num = arr[i];
-        //         return num;
-        //     }
-        // });
 
-        console.log("idx1: " + idx1);
-        console.log(pick);
-        col[pick].innerText = playerTwo.shape;
-        // if (col[pick].innerText !== "") {
-        //     move();
-        // } else {
-        //     col[pick].innerText = playerTwo.shape;
-        // }
+
+
+        if (pick[0] === undefined) {
+            move();
+        } else {
+            col[pick].innerText = playerTwo.shape;
+        }
 
 
 
@@ -220,9 +183,7 @@ function checkWin(shape) {
     var boardArr = [];
     for (var i = 0; i < col.length; i++) {
         boardArr.push(col[i].innerText);
-        var mapped = boardArr.map(function(a, b) {
-            return a.concat(b);
-        });
+
     }
     //pushed index of X and O into serpreate arrays
     var indices = [];
@@ -246,7 +207,7 @@ function checkWin(shape) {
 
     //Find the winner
     check.map(function(el, i) {
-        if (el === true) {
+        if (el) {
             win(shape, combos[i]);
         }
     });
