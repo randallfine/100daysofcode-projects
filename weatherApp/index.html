@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Local Weather</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,700,400" rel="stylesheet" type="text/css">
+    <link href="styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <h1 id="title">Your Local Weather</h1>
+    <div class="container-fluid current">
+        <div class="jumbotron">
+
+            <h2>Currently</h2>
+            <h3 id="city">Your City</h3>
+            <h3 id="dayOfWeek"></h3>
+            <h3 id="date"><span id="month">MM</span> <span id="day">DD</span>, <span id="year">YY</span></h3>
+
+            <h3><span id="time"></span></h3>
+
+            <h3 id="temp-title">The Current Temperature Is</h3>
+
+            <h1><span id="theTemp">00</span></h1>
+
+            <h3>Right Now</h3>
+            <h2><span id="condition">condition</span></h2>
+            <figure class="icons">
+                <canvas id="clear-day" width="128" height="128">
+        </canvas>
+
+                <canvas id="clear-night" width="128" height="128">
+        </canvas>
+
+                <canvas id="partly-cloudy-day" width="128" height="128">
+        </canvas>
+
+                <canvas id="partly-cloudy-night" width="128" height="128">
+        </canvas>
+
+                <canvas id="cloudy" width="128" height="128">
+        </canvas>
+
+                <canvas id="rain" width="128" height="128">
+        </canvas>
+
+                <canvas id="sleet" width="128" height="128">
+        </canvas>
+
+                <canvas id="snow" width="128" height="128">
+        </canvas>
+
+                <canvas id="wind" width="128" height="128">
+        </canvas>
+
+                <canvas id="fog" width="128" height="128">
+        </canvas>
+            </figure>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div id="daily" class="jumbotron">
+        </div>
+    </div>
+
+
+    <div class="container-fluid">
+
+        <div id="hourly" class="jumbotron"></div>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>
