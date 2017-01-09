@@ -88,9 +88,6 @@ var cpu = function() {
         if (col[i].innerText === playerOne.shape) {
             idx1.push(Number(i));
         }
-        if (col[i].innerText === playerTwo.shape) {
-            idx2.push(Number(i));
-        }
     }
 
     if ((playerTwo.turn) && (gameOn)) {
@@ -118,12 +115,27 @@ var cpu = function() {
 
         check.forEach(function(elem, ind) {
             if (elem) {
+                combos[ind].forEach(function(el) {
+                    console.log(el) // if all elements are filled, dont push
+                })
                 isolatedArray.push(combos[ind]);
             }
         });
         checkArray(isolatedArray[0]);
     }
 
+    //###################### CLUSTER FUCK!!!
+    var isoFilter = isolatedArray.map(function(array, ind) {
+        return array
+    });
+
+    console.log(isoFilter.filter(function(el, i) {
+        return el.filter(function(ele, ind) {
+            return idx2.lastIndexOf(ele) < 0
+        })
+    }))
+    console.log(idx2)
+        //#####################################
     function checkArray(arr) {
         var pick = arr.filter(function(index) {
             if (col[index].innerText === "") {
@@ -138,7 +150,11 @@ var cpu = function() {
         } else {
             col[pick].innerText = playerTwo.shape;
         }
-
+        for (var i in col) {
+            if (col[i].innerText === playerTwo.shape) {
+                idx2.push(Number(i));
+            }
+        }
 
 
     }
