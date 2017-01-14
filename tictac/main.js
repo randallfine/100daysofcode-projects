@@ -90,6 +90,7 @@ var cpu = function() {
         }
     }
 
+
     if ((playerTwo.turn) && (gameOn)) {
         if (idx1.length < 2) {
             if (col[4].innerText === "") {
@@ -100,40 +101,36 @@ var cpu = function() {
             switchTurns();
         } else {
             cpuMove();
+            cpuBlock();
             switchTurns();
         }
+
 
     }
 
     function cpuMove() {
+        console.log(idx2)
+    }
+
+    function cpuBlock() {
         //var num;
-        var check = combos.map(function(elem, ind) {
-            return idx1.filter(function(el) {
-                return combos[ind].indexOf(el) > -1;
-            }).length > 1;
-        });
-
-        for (var i in col) {
-            if (col[i].innerText === playerTwo.shape) {
-                idx2.push(Number(i));
-            }
-        }
-        console.log(check)
-        check.forEach(function(elem, ind) {
+        match(idx1).forEach(function(elem, ind) {
             if (elem) {
-                combos[ind].forEach(function(el) {
-                    console.log(el)
-                    if (idx2.indexOf(el) !== -1) {
-                        console.log(combos[ind])
-                    } // if all elements are filled, dont push
-
-                })
+                combos[ind].forEach(function(el) {});
                 isolatedArray.push(combos[ind]);
             }
         });
         checkArray(isolatedArray[0]);
     }
 
+    function match(arr) {
+        var check = combos.map(function(elem, ind) {
+            return arr.filter(function(el) {
+                return combos[ind].indexOf(el) > -1;
+            }).length > 1;
+        });
+        return check;
+    }
     //###################### CLUSTER FUCK!!!
     // var isoFilter = isolatedArray.map(function(array, ind) {
     //     return array
