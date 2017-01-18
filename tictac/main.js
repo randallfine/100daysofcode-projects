@@ -63,13 +63,18 @@ var playerMove = function(player) {
                 twoPlayer();
             }
         };
-
     });
-
-
 };
-
-//player vs CPU 
+ function checkForMove(player){
+   let idxArr = [];
+   for(var i in col){
+     if(col[i].innerText === player.shape){
+       idxArr.push(Number(i));
+     }
+   }
+   return idxArr
+ }
+//player vs CPU
 var cpu = function() {
     var isolatedArray = [];
     var combos = [
@@ -108,15 +113,16 @@ var cpu = function() {
 
     }
 
-    function cpuMove() {
-        console.log(idx2)
+    function cpuMove(array) {
+      console.log(array)
     }
 
     function cpuBlock() {
-        //var num;
         match(idx1).forEach(function(elem, ind) {
             if (elem) {
-                combos[ind].forEach(function(el) {});
+                combos[ind].forEach(function(el) {
+                  console.log(el)
+                });
                 isolatedArray.push(combos[ind]);
             }
         });
@@ -131,39 +137,18 @@ var cpu = function() {
         });
         return check;
     }
-    //###################### CLUSTER FUCK!!!
-    // var isoFilter = isolatedArray.map(function(array, ind) {
-    //     return array
-    // });
 
-    // console.log(isoFilter.filter(function(el, i) {
-    //     return el.filter(function(ele, ind) {
-    //         return idx2.lastIndexOf(ele) > 0
-    //     })
-    // }))
-
-    //#####################################
     function checkArray(arr) {
         var pick = arr.filter(function(index) {
             if (col[index].innerText === "") {
                 return index;
             }
         });
-
-
-
         if (pick[0] === undefined) {
             move();
         } else {
             col[pick].innerText = playerTwo.shape;
         }
-        // for (var i in col) {
-        //     if (col[i].innerText === playerTwo.shape) {
-        //         idx2.push(Number(i));
-        //     }
-        //}
-
-
     }
 
     function move() {
@@ -173,9 +158,7 @@ var cpu = function() {
         } else {
             col[num].innerText = playerTwo.shape;
         }
-
     }
-
 };
 
 
@@ -205,7 +188,6 @@ function checkWin(shape) {
     var boardArr = [];
     for (var i = 0; i < col.length; i++) {
         boardArr.push(col[i].innerText);
-
     }
     //pushed index of X and O into serpreate arrays
     var indices = [];
@@ -217,9 +199,9 @@ function checkWin(shape) {
     if (indices.length === 5) {
         win(indices.length);
     }
-
+    let twoMove = checkForMove(playerTwo)
+    cpuMove(twoMove)
     //Check combos
-
     var check = combos.map(function(elem, ind) {
         return indices.filter(function(el) {
             return combos[ind].indexOf(el) > -1;
