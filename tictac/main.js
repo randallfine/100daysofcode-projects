@@ -65,18 +65,12 @@ var playerMove = function(player) {
         };
     });
 };
- function checkForMove(player){
-   let idxArr = [];
-   for(var i in col){
-     if(col[i].innerText === player.shape){
-       idxArr.push(Number(i));
-     }
-   }
-   return idxArr
- }
+
+
 //player vs CPU
 var cpu = function() {
-    var isolatedArray = [];
+    var playerOneArray = [];
+    let playerTwoArray = [];
     var combos = [
         [0, 1, 2],
         [3, 4, 5],
@@ -105,28 +99,27 @@ var cpu = function() {
             }
             switchTurns();
         } else {
-            cpuMove();
+            //cpuMove();
             cpuBlock();
             switchTurns();
         }
 
-
     }
+    cpuMove(checkForMove(playerTwo))
 
     function cpuMove(array) {
-      console.log(array)
+        let twoMatch = match(array)
+        console.log(twoMatch)
     }
 
     function cpuBlock() {
         match(idx1).forEach(function(elem, ind) {
             if (elem) {
-                combos[ind].forEach(function(el) {
-                  console.log(el)
-                });
-                isolatedArray.push(combos[ind]);
+                combos[ind].forEach(function(el) {}); //COMPLETE ME!!
+                playerOneArray.push(combos[ind]);
             }
         });
-        checkArray(isolatedArray[0]);
+        checkArray(playerOneArray[0]);
     }
 
     function match(arr) {
@@ -135,7 +128,19 @@ var cpu = function() {
                 return combos[ind].indexOf(el) > -1;
             }).length > 1;
         });
+        console.log(check)
         return check;
+
+    }
+
+    function checkForMove(player) {
+        let idxArr = [];
+        for (var i in col) {
+            if (col[i].innerText === player.shape) {
+                idxArr.push(Number(i));
+            }
+        }
+        return idxArr
     }
 
     function checkArray(arr) {
@@ -199,8 +204,6 @@ function checkWin(shape) {
     if (indices.length === 5) {
         win(indices.length);
     }
-    let twoMove = checkForMove(playerTwo)
-    cpuMove(twoMove)
     //Check combos
     var check = combos.map(function(elem, ind) {
         return indices.filter(function(el) {
