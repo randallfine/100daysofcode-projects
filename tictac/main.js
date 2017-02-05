@@ -105,17 +105,31 @@ var cpu = function() {
         }
 
     }
-    cpuMove(checkForMove(playerTwo))
+
+    //console.log((checkForMove(playerOne)))
+    console.log(cpuMove(checkForMove(playerOne)))
+        //console.log((checkForMove(playerTwo)))
+        //cpuMove(checkForMove(playerTwo))
 
     function cpuMove(array) {
-        let twoMatch = match(array)
-        console.log(twoMatch)
+        let matched = match(array).filter(function(arr, i) {
+            if (arr) {
+
+                //checkArray(combos[i])
+                console.log(combos[i])
+                    //checkWin(playerTwo.shape);
+                return i
+            }
+        });
+        console.log(matched);
     }
 
     function cpuBlock() {
         match(idx1).forEach(function(elem, ind) {
             if (elem) {
-                combos[ind].forEach(function(el) {}); //COMPLETE ME!!
+                combos[ind].forEach(function(el) {
+                    //console.log(el)
+                }); //COMPLETE ME!!
                 playerOneArray.push(combos[ind]);
             }
         });
@@ -128,9 +142,13 @@ var cpu = function() {
                 return combos[ind].indexOf(el) > -1;
             }).length > 1;
         });
-        console.log(check)
+        // check.filter(function(e, i) {
+        //         if (e) {
+        //             console.log(combos[i])
+        //         }
+        //     })
+        // console.log(check)
         return check;
-
     }
 
     function checkForMove(player) {
@@ -149,11 +167,13 @@ var cpu = function() {
                 return index;
             }
         });
-        if (pick[0] === undefined) {
-            move();
-        } else {
-            col[pick].innerText = playerTwo.shape;
-        }
+        console.log(pick)
+            // if (pick[0] === undefined) {
+            //     move();
+            // } else {
+            //     col[pick].innerText = playerTwo.shape;
+            // }
+        col[pick].innerText = playerTwo.shape;
     }
 
     function move() {
