@@ -89,6 +89,12 @@ var cpu = function() {
         }
     }
 
+    for (var i in col) {
+        if (col[i].innerText === playerTwo.shape) {
+            idx2.push(Number(i));
+        }
+    }
+    console.log(idx2)
 
     if ((playerTwo.turn) && (gameOn)) {
         if (idx1.length < 2) {
@@ -99,7 +105,7 @@ var cpu = function() {
             }
             switchTurns();
         } else {
-            //cpuMove();
+            cpuMove();
             cpuBlock();
             switchTurns();
         }
@@ -107,33 +113,52 @@ var cpu = function() {
     }
 
     //console.log((checkForMove(playerOne)))
-    console.log(cpuMove(checkForMove(playerOne)))
-        //console.log((checkForMove(playerTwo)))
-        //cpuMove(checkForMove(playerTwo))
+    //console.log(cpuMove(checkForMove(playerOne)))
+    //console.log((checkForMove(playerTwo)))
 
+    console.log(cpuMove(checkForMove(playerTwo)))
+
+    // function cpuMove(array) {
+    //     let matched = match(array).filter(function(arr, i) {
+    //         if (arr) {
+    //             if (combos[i].indexOf("") < 0) {
+    //                 checkArray(combos[i])
+    //                 console.log(combos[i])
+    //                 checkWin(playerTwo.shape);
+    //                 console.log(i)
+    //             }
+
+    //         }
+    //     });
+    // }
     function cpuMove(array) {
-        let matched = match(array).filter(function(arr, i) {
-            if (arr) {
-
-                //checkArray(combos[i])
-                console.log(combos[i])
-                    //checkWin(playerTwo.shape);
-                return i
+        match(idx2).forEach(function(elem, ind) {
+            if (elem) {
+                combos[ind].forEach(function(el) {
+                    // console.log(el)
+                }); //COMPLETE ME!!
+                playerTwoArray.push(combos[ind]);
             }
         });
-        console.log(matched);
+        //console.log(playerTwoArray)
+        //checkArray(playerTwoArray[0]);
     }
+
 
     function cpuBlock() {
         match(idx1).forEach(function(elem, ind) {
             if (elem) {
-                combos[ind].forEach(function(el) {
-                    //console.log(el)
-                }); //COMPLETE ME!!
-                playerOneArray.push(combos[ind]);
+                // console.log(elem, ind)
+                // combos[ind].forEach(function(el) {
+                //     //console.log(el)
+                // }); //COMPLETE ME!!
+                console.log(combos[ind])
+                checkArray(combos[ind]);
+                checkWin(playerTwo.shape);
             }
         });
-        checkArray(playerOneArray[0]);
+        //console.log(playerOneArray)
+        //checkArray(playerOneArray);
     }
 
     function match(arr) {
@@ -158,6 +183,7 @@ var cpu = function() {
                 idxArr.push(Number(i));
             }
         }
+        // console.log(idxArr)
         return idxArr
     }
 
@@ -195,7 +221,7 @@ function switchTurns() {
     playerOne.turn = true;
 }
 
-
+//##################################################################################################
 
 function checkWin(shape) {
 
