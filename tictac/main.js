@@ -68,152 +68,60 @@ var playerMove = function(player) {
 
 
 //player vs CPU
-var cpu = function() {
-    var playerOneArray = [];
-    let playerTwoArray = [];
-    var combos = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6]
-    ];
-    var idx1 = [];
-    var idx2 = [];
-    for (var i in col) {
-        if (col[i].innerText === playerOne.shape) {
-            idx1.push(Number(i));
-        }
-    }
-
-    for (var i in col) {
-        if (col[i].innerText === playerTwo.shape) {
-            idx2.push(Number(i));
-        }
-    }
-    console.log(idx2)
-
-    if ((playerTwo.turn) && (gameOn)) {
-        if (idx1.length < 2) {
-            if (col[4].innerText === "") {
-                col[4].innerText = playerTwo.shape;
-            } else {
-                move();
-            }
-            switchTurns();
+function cpu() {
+    function score(game, depth) {
+        if (game.win === playerOne) {
+            return 10 - depth;
+        } else if (game.win === playerTwo) {
+            return depth - 10;
         } else {
-            cpuMove();
-            cpuBlock();
-            switchTurns();
-        }
-
-    }
-
-    //console.log((checkForMove(playerOne)))
-    //console.log(cpuMove(checkForMove(playerOne)))
-    //console.log((checkForMove(playerTwo)))
-
-    console.log(cpuMove(checkForMove(playerTwo)))
-
-    // function cpuMove(array) {
-    //     let matched = match(array).filter(function(arr, i) {
-    //         if (arr) {
-    //             if (combos[i].indexOf("") < 0) {
-    //                 checkArray(combos[i])
-    //                 console.log(combos[i])
-    //                 checkWin(playerTwo.shape);
-    //                 console.log(i)
-    //             }
-
-    //         }
-    //     });
-    // }
-    function cpuMove(array) {
-        match(idx2).forEach(function(elem, ind) {
-            if (elem) {
-                combos[ind].forEach(function(el) {
-                    // console.log(el)
-                }); //COMPLETE ME!!
-                playerTwoArray.push(combos[ind]);
-            }
-        });
-        //console.log(playerTwoArray)
-        //checkArray(playerTwoArray[0]);
-    }
-
-
-    function cpuBlock() {
-        match(idx1).forEach(function(elem, ind) {
-            if (elem) {
-                // console.log(elem, ind)
-                // combos[ind].forEach(function(el) {
-                //     //console.log(el)
-                // }); //COMPLETE ME!!
-                console.log(combos[ind])
-                checkArray(combos[ind]);
-                checkWin(playerTwo.shape);
-            }
-        });
-        //console.log(playerOneArray)
-        //checkArray(playerOneArray);
-    }
-
-    function match(arr) {
-        var check = combos.map(function(elem, ind) {
-            return arr.filter(function(el) {
-                return combos[ind].indexOf(el) > -1;
-            }).length > 1;
-        });
-        // check.filter(function(e, i) {
-        //         if (e) {
-        //             console.log(combos[i])
-        //         }
-        //     })
-        // console.log(check)
-        return check;
-    }
-
-    function checkForMove(player) {
-        let idxArr = [];
-        for (var i in col) {
-            if (col[i].innerText === player.shape) {
-                idxArr.push(Number(i));
-            }
-        }
-        // console.log(idxArr)
-        return idxArr
-    }
-
-    function checkArray(arr) {
-        var pick = arr.filter(function(index) {
-            if (col[index].innerText === "") {
-                return index;
-            }
-        });
-        console.log(pick)
-            // if (pick[0] === undefined) {
-            //     move();
-            // } else {
-            //     col[pick].innerText = playerTwo.shape;
-            // }
-        col[pick].innerText = playerTwo.shape;
-    }
-
-    function move() {
-        var num = Math.floor(Math.random() * 8);
-        if (col[num].innerText !== "") {
-            move();
-        } else {
-            col[num].innerText = playerTwo.shape;
+            return 0
         }
     }
-};
 
+    function minimax(game, depth) {
+        if (!gameOn) {
+            return score(game)
+        }
+        depth += 1;
+        score = []
+        moves = []
+    }
 
+    def minimax(game, depth)
+    return score(game) if game.over ?
+        depth += 1
+    scores = []# an array of scores
+    moves = []# an array of moves
 
+    # Populate the scores array, recursing as needed
+    game.get_available_moves.each do |move |
+            possible_game = game.get_new_state(move)
+        scores.push minimax(possible_game, depth)
+    moves.push move
+    end
+
+    # Do the min or the max calculation
+    if game.active_turn == @player# This is the max calculation
+    max_score_index = scores.each_with_index.max[1]
+    @choice = moves[max_score_index]
+    return scores[max_score_index]
+    else# This is the min calculation
+    min_score_index = scores.each_with_index.min[1]
+    @choice = moves[min_score_index]
+    return scores[min_score_index]
+    end
+    end
+}
+
+function move() {
+    var num = Math.floor(Math.random() * 8);
+    if (col[num].innerText !== "") {
+        move();
+    } else {
+        col[num].innerText = playerTwo.shape;
+    }
+}
 
 function switchTurns() {
     checkWin(playerTwo.shape);
