@@ -1,0 +1,162 @@
+#root {
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    background: black;
+}
+
+.play-area {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    bottom: 20%;
+    left: 0;
+    right: 0;
+    width: 20%;
+    height: 30%;
+    align-self: center;
+    margin: auto;
+}
+
+.play-buttons {
+    flex: 0 1;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: rotate(45deg);
+    margin: auto;
+    height: 400px;
+    width: 400px;
+}
+
+.start-strict {
+    flex: 0 1 75%;
+    border-radius: 15%;
+    display: flex;
+    justify-content: space-around;
+    height: 100%;
+    background: white;
+}
+
+.start {
+    order: 1;
+    color: white;
+    background: indigo;
+    border-radius: 50%;
+    align-self: flex-start;
+    flex: 0 1 8em;
+    height: 4em;
+}
+
+.start:focus {
+    border: none;
+    outline: none;
+}
+
+.strict-button {
+    order: 3;
+    color: white;
+    background: blue;
+    border-radius: 50%;
+    align-self: flex-start;
+    flex: 0 1 8em;
+    height: 4em;
+}
+
+.strict-button:focus {
+    border: none;
+    outline: none;
+}
+
+.step-counter {
+    order: 2;
+    margin: auto;
+    background: black;
+    color: red;
+    flex: 0 1 8em;
+    height: 3em;
+    align-self: flex-end;
+}
+
+.start-strict {
+    align-self: flex-end;
+}
+
+.outer {
+    width: 100%;
+    height: 100%;
+}
+
+#green {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-right: 6em solid transparent;
+    border-bottom: 6em solid transparent;
+    border-top: 6em solid green;
+}
+
+#red {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-left: 6em solid transparent;
+    border-bottom: 6em solid transparent;
+    border-top: 6em solid red;
+}
+
+#yellow {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-right: 6em solid transparent;
+    border-top: 6em solid transparent;
+    border-bottom: 6em solid yellow;
+}
+
+#blue {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-left: 6em solid transparent;
+    border-top: 6em solid transparent;
+    border-bottom: 6em solid blue;
+}
+
+.step-counter {
+    text-align: center;
+}
+
+.play {
+    width: 25%;
+    height: 25%;
+    opacity: .5;
+}
+
+.play:active {
+    opacity: 1;
+}
+
+.lightUp {
+    animation: lights 1s linear;
+}
+
+@keyframes lights {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: .5;
+    }
+}
